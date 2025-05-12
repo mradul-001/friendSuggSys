@@ -1,9 +1,25 @@
-import { Link } from "react-router-dom";
 import { RxHamburgerMenu } from "react-icons/rx";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import "../components/FriendList";
+import FriendList from "../components/FriendList";
 
 function Home() {
+  const name = "Mradul";
+  const noOfFriends = 10;
+  const recentAct = ["Added a friend", "Removed a friend"];
+  // const [isToggled, setIsToggled] = useState(false);
+
+  // const toggleList = () => {
+  //   setIsToggled(prev => !prev);
+  // };
+  
+
   return (
     <>
+
+      {/* {istoggled && <FriendList />} */}
+
       <div className="bg absolute -z-10">
         <img
           src="/assets/bg.svg"
@@ -35,7 +51,7 @@ function Home() {
         <div className="md:w-[60%] w-full left h-[60%] md:h-full flex flex-col justify-between">
           <div>
             <span className="md:text-[35px] text-[25px] text-white text-shadow-md">
-              Welcome, Name
+              Welcome, {name}
             </span>
             <br />
             <span className="text-white text-shadow-md md:w-[100vw] h-[100vh] md:text-xl text-lg">
@@ -44,8 +60,8 @@ function Home() {
           </div>
 
           <div className="flex md:flex-row flex-col mt-4">
-            <div className="friendcount md:w-[40%] w-full bg-black bg-opacity-30 text-white shadow-md rounded-md p-4 text-xl">
-              <p>8</p>
+            <div className="friendcount md:w-[40%] w-full bg-black bg-opacity-50 text-white shadow-md rounded-md p-4 text-xl">
+              <p>{noOfFriends}</p>
               <p>Friends</p>
             </div>
 
@@ -71,18 +87,9 @@ function Home() {
             Recent Activities
           </p>
           <ul className="px-8 h-[150px] md:h-[200px] overflow-auto">
-            <li>first activity</li>
-            <li>second activity</li>
-            <li>first activity</li>
-            <li>second activity</li>
-            <li>first activity</li>
-            <li>second activity</li>
-            <li>first activity</li> <li>first activity</li>
-            <li>second activity</li>
-            <li>first activity</li> <li>first activity</li>
-            <li>second activity</li>
-            <li>first activity</li>
-            <li>second activity</li>
+            {recentAct.map((activity, index) => (
+              <li key={index}>{activity}</li>
+            ))}
           </ul>
         </div>
       </div>
