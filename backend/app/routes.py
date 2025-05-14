@@ -1,18 +1,17 @@
-from fastapi import APIRouter, Request
-from app.db import get_db
+from fastapi import APIRouter
+from app.db import get_connection
+from app.users import User, insert_user
 
 router = APIRouter()
 
+@router.post("/users")
+def create_user(user: User):
+    conn = get_connection()
+    user_id = insert_user(conn, user)
+    conn.close()
+    return {"id": user_id}
+
+
 @router.post("/register")
-async def register_user(request: Request):
-    data = await request.json()
-    name = data["name"]
-    email = data["email"]
-    password = data["password"]
-
-    db = get_db()
-    db.execute("INSERT INTO users (name, email, password) VALUES (?, ?, ?)", 
-               (name, email, password))
-    db.commit()
-    return {"status": "success", "message": "User registered"}
-
+def register_user():
+    pass
